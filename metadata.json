@@ -1,0 +1,6 @@
+{
+  "name": "Floussi AI - Moroccan Income & Business Builder",
+  "description": "Plateforme et copilote IA pour générer des revenus réels, lancer des projets rentables (E-commerce COD, Freelance, SMMA) et piloter ses gains au Maroc.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

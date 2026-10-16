@@ -1,0 +1,300 @@
+import { Blueprint } from '../types';
+
+export const BLUEPRINTS: Blueprint[] = [
+  {
+    id: 'local-cod-ecommerce',
+    title: 'Local E-Commerce with Cash On Delivery (COD)',
+    titleDarija: 'التجارة الإلكترونية المحلية والدفع عند الاستلام (COD)',
+    category: 'ecommerce',
+    minCapital: 800,
+    timeRequired: '3-4 hours/day',
+    deviceRequired: 'either',
+    potentialMonthlyIncomeMAD: '6,000 - 25,000 DH',
+    difficulty: 'Intermediate',
+    summary: 'Source in-demand physical items locally from Moroccan wholesale markets (Derb Omar, Garage Allal, Inezgane) or AliExpress, run TikTok/FB video ads or organic reels, and fulfill via Moroccan courier services with Cash on Delivery.',
+    summaryDarija: 'كتشري سلعة مطلوبة من أسواق الجملة (درب عمر، جراج علال، إنزكان) ولا كتجيبها عينات، كدير إشهار فتيك توك ولا إنستغرام، وكتصيفطها مع شركة توصيل وكتخلص كاش فاش كتوصل السلعة للكليان.',
+    image: '/src/assets/images/business_local_ecommerce_1791806709675.jpg',
+    keySteps: [
+      {
+        title: 'Step 1: Niche & Product Hunting',
+        description: 'Look for problem-solving or viral aesthetics (kitchen gadgets, car organizers, beauty tools, posture correctors) with 3x-4x markup potential.',
+      },
+      {
+        title: 'Step 2: Local Sourcing & Negotiation',
+        description: 'Visit Derb Omar / Garage Allal in Casablanca or local wholesalers in your city. Buy test stock of 5-10 units only at wholesale prices.',
+      },
+      {
+        title: 'Step 3: Store Setup with YouCan or Shopify',
+        description: 'Setup a quick 1-page landing page in Moroccan Darija and French with clean photos, customer reviews, and a 1-click COD order form (Name, Phone, City).',
+      },
+      {
+        title: 'Step 4: Phone Confirmation & Delivery Dispatch',
+        description: 'Call the customer within 15 minutes of ordering to confirm address and seriousness. Hand parcels to Cathedis, Ozmack, Amana, or Sendit.',
+      },
+    ],
+    moroccanToolsAndPartners: ['YouCan.shop (Moroccan payment gateway & store)', 'Cathedis / Ozmack / Sendit (COD couriers)', 'CIH Bank / Attijariwafa (receiving COD payouts)', 'Canva (ad creatives)'],
+    firstWeekAction: 'Go to TikTok Creative Center or search #tiktokmademebuyit morocco, find 3 products, and visit your local wholesale market to check wholesale unit price.',
+    commonMistakes: [
+      'Buying 100 units before testing demand (leads to dead stock).',
+      'Neglecting phone confirmation (results in high return/refusal rate >40%).',
+      'Underestimating shipping return fees (calculate 40-50 DH per returned parcel).',
+    ],
+  },
+  {
+    id: 'smma-local-business',
+    title: 'Local Business Social Media Management (SMMA)',
+    titleDarija: 'إدارة وتنشيط صفحات المحلات والشركات المحلية (SMMA)',
+    category: 'agency',
+    minCapital: 0,
+    timeRequired: '2-3 hours/day',
+    deviceRequired: 'smartphone',
+    potentialMonthlyIncomeMAD: '4,500 - 18,000 DH',
+    difficulty: 'Beginner',
+    summary: 'Help local businesses (cafes, dental clinics, boutiques, gyms, aesthetic centers) create modern vertical TikTok/Reels, optimize their Google Business profile, and respond to customer DMs. Charge 1,500 - 3,000 DH/month per client.',
+    summaryDarija: 'كتعاون محلات فمدينتك (قهاوي، أطباء أسنان، محلات ملابس، صالونات حلاقة) باش تصاوب ليهم فيديوهات ريلز وتيك توك نقية وتجاوب على الرسائل. كل كليان كيعطيك من 1,500 حتى 3,000 درهم فالشهر.',
+    image: '/src/assets/images/business_freelance_creator_1791806720136.jpg',
+    keySteps: [
+      {
+        title: 'Step 1: Scout Unoptimized Local Businesses',
+        description: 'Walk in your city or check Instagram & Google Maps for local businesses with great food/services but dead or ugly social media pages.',
+      },
+      {
+        title: 'Step 2: Film a 1-Video Sample for Free',
+        description: 'Visit the shop, buy a coffee or item, film 1 high-quality cinematic reel with your phone, edit it in CapCut with trending audio, and send it to the owner as a gift.',
+      },
+      {
+        title: 'Step 3: Close a Monthly Retainer (1,500 DH/month)',
+        description: 'Pitch them: "I will visit twice a month, film 12 reels, write captions in Darija/French, and manage your comments so you get more walk-in customers."',
+      },
+      {
+        title: 'Step 4: Scale to 3-5 Clients',
+        description: 'With 3 clients at 2,000 DH/month, you generate 6,000 DH/month with only smartphone and travel within your city.',
+      },
+    ],
+    moroccanToolsAndPartners: ['CapCut (phone video editing)', 'Google Business Profile Manager', 'Canva (flyers & stories)', 'Instagram Business Creator'],
+    firstWeekAction: 'Pick 5 local cafes or dental clinics near your neighborhood, film 1 test reel for one of them, and send it via Instagram DM with our pitch template.',
+    commonMistakes: [
+      'Sending generic spam DMs asking for money before showing proof of skill.',
+      'Promising millions of views instead of tangible foot traffic or customer inquiries.',
+      'Not asking for 50% deposit upfront at the start of each month.',
+    ],
+  },
+  {
+    id: 'short-form-video-editor',
+    title: 'Short-Form Video Editor for Creators & E-Com',
+    titleDarija: 'مونتاج الفيديوهات القصيرة (Reels & TikTok) للمؤثرين والمتاجر',
+    category: 'freelance',
+    minCapital: 0,
+    timeRequired: '2-4 hours/day',
+    deviceRequired: 'either',
+    potentialMonthlyIncomeMAD: '5,000 - 15,000 DH',
+    difficulty: 'Beginner',
+    summary: 'Edit dynamic Reels, TikToks, and YouTube Shorts for content creators, podcasts, and Moroccan or Gulf e-commerce brands using CapCut or Premiere. Charge 50 - 150 DH per video.',
+    summaryDarija: 'كتعلم تقطع وتزوق فيديوهات تيك توك وريلز (Subtitles بالدريجة، مؤثرات صوتية، زوم، صور توضيحية) لكرياتورز من المغرب ولا الخليج. الربح بين 50 و150 درهم لكل فيديو كتركبو.',
+    image: '/src/assets/images/business_freelance_creator_1791806720136.jpg',
+    keySteps: [
+      {
+        title: 'Step 1: Master CapCut / Premiere Hooks',
+        description: 'Learn fast pacing, animated auto-captions, sound effects (whoosh, pop), and b-roll inserts in 3-5 days watching YouTube tutorials.',
+      },
+      {
+        title: 'Step 2: Build a 3-Video Portfolio',
+        description: 'Download raw clips of Moroccan or French podcasts / long YouTube videos, cut them into 45-second high-energy shorts, and save them in a Google Drive folder.',
+      },
+      {
+        title: 'Step 3: Reach Out to 10 Creators Daily',
+        description: 'Find active creators with low-effort video editing. Send them: "Salam, I loved your last podcast. I re-edited this 30s clip for you to post. If you like it, I can edit 20 videos/month for you."',
+      },
+      {
+        title: 'Step 4: Upsell Batch Packages',
+        description: 'Offer monthly packs: 20 edited reels per month for 2,000 DH (100 DH/video). Two monthly clients = 4,000 DH recurrent income.',
+      },
+    ],
+    moroccanToolsAndPartners: ['CapCut Pro (mobile or desktop)', 'Google Drive (portfolio sharing)', 'CIH Bank / Cash Plus (client payments)', 'WhatsApp Business'],
+    firstWeekAction: 'Download CapCut, edit 2 clips from any popular Moroccan podcast (e.g. MedTalks or similar), and assemble your 2-link portfolio.',
+    commonMistakes: [
+      'Sending raw text messages with no video sample attached.',
+      'Over-editing with dizzying transition effects that ruin the original voice.',
+      'Delivering files late without communicating beforehand.',
+    ],
+  },
+  {
+    id: 'canva-digital-products',
+    title: 'Canva Digital Products & Local Printables',
+    titleDarija: 'تصميم وبيع المنتجات الرقمية (دعوات أعراس، موني كافيهات، بلانرات)',
+    category: 'content',
+    minCapital: 100,
+    timeRequired: '1-3 hours/day',
+    deviceRequired: 'either',
+    potentialMonthlyIncomeMAD: '3,000 - 12,000 DH',
+    difficulty: 'Beginner',
+    summary: 'Design ready-to-use digital templates tailored to Morocco: interactive wedding invitations (WhatsApp video invites), cafe QR menus, Ramadan/budget planners, and social media templates sold via WhatsApp or YouCan.',
+    summaryDarija: 'كتصاوب بطاقات دعوة رقمية للأعراس المغربية (فيديو واتساب كيبان فيه اسم العروسين)، قوائم أطعمة بالكود QR للمقاهي، ومفكرات يومية. المبيعات 100% ربح حيت مافيهاش تكلفة سلعة.',
+    keySteps: [
+      {
+        title: 'Step 1: Identify High-Emotion Moroccan Occasions',
+        description: 'Weddings (D3wa dyal 3ers), birth celebrations (Sbou3), Ramadan planners, and new cafe openings have high willingness to spend.',
+      },
+      {
+        title: 'Step 2: Design 5 Stunning Template Styles in Canva',
+        description: 'Use elegant Moroccan fonts, traditional borders, gold accents, and animated music for digital invitations.',
+      },
+      {
+        title: 'Step 3: Launch an Instagram / TikTok Page',
+        description: 'Showcase "Before & After" invitations, personalized with romantic Moroccan songs. Add WhatsApp link for direct orders (150 - 300 DH per customized file).',
+      },
+      {
+        title: 'Step 4: Automate Delivery via WhatsApp',
+        description: 'When the customer sends family names and date via WhatsApp, you spend 5 minutes editing the template and send the MP4 video or PDF. Zero inventory, zero shipping risks.',
+      },
+    ],
+    moroccanToolsAndPartners: ['Canva Free or Pro', 'WhatsApp Business with catalog', 'CIH Bank / Cash Plus', 'CapCut for music syncing'],
+    firstWeekAction: 'Create 2 mock wedding invitation videos in Canva with traditional Moroccan music and publish them on a new TikTok account.',
+    commonMistakes: [
+      'Using low-resolution images or misspelled family names in Arabic.',
+      'Not putting a clear watermark on sample previews before customer pays.',
+    ],
+  },
+  {
+    id: 'nocode-web-creation',
+    title: 'No-Code E-Commerce Stores for Merchants',
+    titleDarija: 'إنشاء متاجر إلكترونية للتجار المحليين بدون برمجة (YouCan & Shopify)',
+    category: 'tech-nocode',
+    minCapital: 0,
+    timeRequired: '3-4 hours/day',
+    deviceRequired: 'laptop',
+    potentialMonthlyIncomeMAD: '6,000 - 20,000 DH',
+    difficulty: 'Intermediate',
+    summary: 'Thousands of traditional Moroccan store owners (perfume, shoes, clothing, furniture) want to sell online but do not know how to set up YouCan, Shopify, or configure COD shipping. You build turnkey stores for 2,000 - 4,000 DH per project.',
+    summaryDarija: 'بزاف ديال التجار فمدينتك باغين يبيعو فالإنترنت ولكن مكيقشعو والو فالبيسي وYouCan. كتقاد ليهم متجر متكامل (تصاور نقيين، الدفع عند الاستلام، ربط شركة التوصيل) بـ 2,000 حتى 4,000 درهم للمتجر.',
+    keySteps: [
+      {
+        title: 'Step 1: Master YouCan.shop Platform',
+        description: 'YouCan is 100% Moroccan-friendly, charges no monthly fee (only small transaction fee), and supports COD forms and Moroccan courier APIs out of the box.',
+      },
+      {
+        title: 'Step 2: Create a Demo Store as Showroom',
+        description: 'Build one stunning mock store for Moroccan leather goods or cosmetics with clean banners, FAQs, and mobile-optimized checkout.',
+      },
+      {
+        title: 'Step 3: Pitch Local Merchants in Commercial Zones',
+        description: 'Visit merchants or find them on Instagram selling only via DM: "You are losing 50% of orders because customers have to wait for your DM replies. Let me build your automated store."',
+      },
+      {
+        title: 'Step 4: Handover & Training (Charge Maintenance Fee)',
+        description: 'Deliver the store, teach them 30 minutes how to accept orders on their phone, and offer monthly maintenance/updating for 500 DH/month.',
+      },
+    ],
+    moroccanToolsAndPartners: ['YouCan.shop / Shopify', 'Canva (banners)', 'Cathedis / Ozmack integrations', 'Local commercial centers'],
+    firstWeekAction: 'Create a free YouCan account, watch 2 YouTube tutorials on setting up a COD store, and build your first demo store in 48 hours.',
+    commonMistakes: [
+      'Over-complicating design with heavy animations that slow down mobile loading on 4G.',
+      'Not collecting high-resolution photos of the merchant products.',
+    ],
+  },
+  {
+    id: 'frippe-chic-curation',
+    title: 'Curated Thrifting & Vintage Reselling (Frippe Chic)',
+    titleDarija: 'تجارة الملابس المستعملة والماركات النادرة (الفريپ شيك وجوطية)',
+    category: 'local',
+    minCapital: 300,
+    timeRequired: '2-3 hours/day',
+    deviceRequired: 'smartphone',
+    potentialMonthlyIncomeMAD: '3,500 - 14,000 DH',
+    difficulty: 'Beginner',
+    summary: 'Visit local weekly markets (Joutiya / Souk) in your city, hunt authentic vintage streetwear, retro jerseys, leather jackets, or rare sneakers for 30 - 80 DH, wash/iron them, photograph aesthetically, and resell for 200 - 500 DH on Instagram & Vinted.',
+    summaryDarija: 'كتنوض بكري للجوطية ولا سوق السبت/الأحد فمدينتك، كتنقي حوايج ماركات نادرة (جاكيطات جلد، تريكويات قدام، سبرديلات) بـ 30-70 درهم، كتصبنهم وتحددهم وتصورهم بطريقة عصرية، وكتبيعهم بـ 250-450 درهم فأنستغرام.',
+    keySteps: [
+      {
+        title: 'Step 1: Morning Sourcing Hunt',
+        description: 'Go early (7:00 AM) to your city famous Joutiya (e.g. Souk El Korra, Souk Inezgane, Bab Khemis, etc.). Look for recognized brands (Nike, Carhartt, Ralph Lauren, vintage denim).',
+      },
+      {
+        title: 'Step 2: Restoring & Aesthetic Care',
+        description: 'Wash thoroughly with nice fabric conditioner, iron crisp, and eliminate any lint or loose threads.',
+      },
+      {
+        title: 'Step 3: Flat-Lay & Model Photography',
+        description: 'Photograph near natural window daylight on a clean floor or have a friend wear it. Detail precise measurements (chest width, length).',
+      },
+      {
+        title: 'Step 4: Drop System on Instagram',
+        description: 'Announce "Drop Date: Sunday 8:00 PM". First person to comment "Mine" in comments or DM wins. Send via Amana or local delivery.',
+      },
+    ],
+    moroccanToolsAndPartners: ['Instagram Store', 'Amana Post / Sendit', 'CIH Bank / Cash Plus', 'Local Joutiya'],
+    firstWeekAction: 'Take 200 DH, visit your local souk this weekend, pick 3 high-quality pieces, wash and style them, and post your first Instagram drop.',
+    commonMistakes: [
+      'Buying stained or damaged clothes without inspecting carefully under daylight.',
+      'Taking dark, blurry photos in bedroom lighting.',
+    ],
+  },
+  {
+    id: 'translation-transcription',
+    title: 'Darija-French-English Translation & Transcription',
+    titleDarija: 'الترجمة وتفريغ الصوت (الدارجة، الفرنسية، الإنجليزية) للمحتوى والشركات',
+    category: 'freelance',
+    minCapital: 0,
+    timeRequired: '2-4 hours/day',
+    deviceRequired: 'either',
+    potentialMonthlyIncomeMAD: '4,000 - 12,000 DH',
+    difficulty: 'Beginner',
+    summary: 'Translate scripts, subtitles, legal summaries, or customer questionnaires between Moroccan Darija, French, Modern Arabic, and English for international agencies, YouTubers, and NGOs doing research in Morocco.',
+    summaryDarija: 'بزاف ديال الجمعيات الدولية واليوتيوبرز والشركات الأجنبية كيبغيو يترجمو ويديرو Subtitles بالدارجة ولا يفرغو تسجيلات صوتية. خدمة ساهلة كتحتاج غير الدقة واللغة.',
+    keySteps: [
+      {
+        title: 'Step 1: Build Sample Translations',
+        description: 'Create a 1-page PDF showing sample translation from Darija audio to French and English, formatted cleanly.',
+      },
+      {
+        title: 'Step 2: Register on Mostaql, Khamsat & Upwork',
+        description: 'Target keywords: "Moroccan Darija translation", "French Arabic transcription", "Subtitling Morocco".',
+      },
+      {
+        title: 'Step 3: Pitch Moroccan YouTubers & Podcasts',
+        description: 'Offer to add accurate French/English subtitles to their top 3 videos so they reach the Moroccan diaspora in France, Canada, and Spain.',
+      },
+    ],
+    moroccanToolsAndPartners: ['Khamsat / Mostaql (Arab freelance)', 'Upwork / Fiverr', 'Google Docs', 'Wise / Payoneer / CIH Bank'],
+    firstWeekAction: 'Transcribe and translate a 2-minute Darija YouTube interview into French and English to create your one-page showcase proof.',
+    commonMistakes: [
+      'Using literal Google Translate without adjusting for Moroccan cultural expressions and idioms.',
+    ],
+  },
+  {
+    id: 'remote-appointment-setting',
+    title: 'Remote Appointment Setting for French/Gulf Agencies',
+    titleDarija: 'تحديد المواعيد عن بعد (Appointment Setting) لشركات فرنسا والخليج',
+    category: 'agency',
+    minCapital: 0,
+    timeRequired: '3-5 hours/day',
+    deviceRequired: 'either',
+    potentialMonthlyIncomeMAD: '6,000 - 18,000 DH',
+    difficulty: 'Intermediate',
+    summary: 'Work remotely from home for marketing agencies or B2B software companies in France or the Gulf countries. Reach out to warm leads via LinkedIn or Instagram and book discovery calls on their calendar. Earn a base salary + 500 - 1,500 DH commission per qualified appointment.',
+    summaryDarija: 'كتخدم من دارك مع شركات ووكالات ففرنسا ولا الخليج. كتهضر مع الناس فـ LinkedIn ولا إنستغرام وكتحدّد ليهم موعد فـ Google Meet مع مدير المبيعات. كتربح خلصة أو عمولة على كل موعد مؤكد.',
+    keySteps: [
+      {
+        title: 'Step 1: Polish Your Communication & Accent',
+        description: 'Fluent conversational French or Arabic is required. Practice handling objections and active listening.',
+      },
+      {
+        title: 'Step 2: Learn Setter Frameworks',
+        description: 'Understand: Greeting -> Pain Point Identification -> Agitation -> Soft Pitch -> Calendar Booking link.',
+      },
+      {
+        title: 'Step 3: Apply on LinkedIn & Setter Groups',
+        description: 'Search LinkedIn for "Appointment Setter télétravail" or join French entrepreneurial Discord/Facebook groups.',
+      },
+      {
+        title: 'Step 4: Close 1-2 Appointments Daily',
+        description: '20 booked appointments a month with 50€ (550 DH) commission each = 11,000 DH monthly remote income.',
+      },
+    ],
+    moroccanToolsAndPartners: ['LinkedIn Sales Navigator', 'Calendly', 'Google Meet', 'Wise / CIH Bank'],
+    firstWeekAction: 'Optimize your LinkedIn profile to say "Remote B2B Appointment Setter | French & English Speaker" and apply to 10 setter postings.',
+    commonMistakes: [
+      'Pitching immediately in the first message before understanding if the lead has a problem.',
+    ],
+  },
+];
