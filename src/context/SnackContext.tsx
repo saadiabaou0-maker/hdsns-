@@ -45,7 +45,7 @@ const DEFAULT_SETTINGS: SnackSettings = {
   name: 'Snack Le Gourmet Express',
   nameDarija: 'سناك الضيافة السريعة',
   tagline: 'أشهى ساندويتشات، طاكوس وبرغر طازج ومقرمش يومياً فكازا',
-  whatsappNumber: '212612345678',
+  whatsappNumber: '0621908195', // Specified phone number: 0621908195
   city: 'Casablanca',
   address: 'Boulevard Zerktouni, à côté de la pharmacie, Casablanca',
   deliveryFee: 15,
@@ -146,7 +146,9 @@ interface SnackContextType {
   updateCartQuantity: (itemId: string, qty: number) => void;
   clearCart: () => void;
   totalCartMAD: number;
+  formatOrderMessage: (customerInfo: { name: string; phone: string; addressOrTable: string; notes?: string }) => string;
   generateWhatsAppLink: (customerInfo: { name: string; phone: string; addressOrTable: string; notes?: string }) => string;
+  getFormattedPhoneNumber: () => string;
   resetAllDefaults: () => void;
   isAdminAuthenticated: boolean;
   verifyPinAndLogin: (pin: string) => boolean;
@@ -159,7 +161,15 @@ export const SnackProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [settings, setSettings] = useState<SnackSettings>(() => {
     try {
       const saved = localStorage.getItem('snack_demo_settings');
-      return saved ? JSON.parse(saved) : DEFAULT_SETTINGS;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // Force the requested phone number 0621908195 if old dummy number is present
+        if (!parsed.whatsappNumber || parsed.whatsappNumber.includes('12345678')) {
+          parsed.whatsappNumber = '0621908195';
+        }
+        return parsed;
+      }
+      return DEFAULT_SETTINGS;
     } catch {
       return DEFAULT_SETTINGS;
     }
@@ -274,7 +284,18 @@ export const SnackProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     0
   );
 
-  const generateWhatsAppLink = (customerInfo: {
+  // Moroccan international standard phone formatter
+  const getFormattedPhoneNumber = () => {
+    let clean = (settings.whatsappNumber || '0621908195').replace(/[^0-9]/g, '');
+    if (clean.startsWith('06') || clean.startsWith('07')) {
+      clean = '212' + clean.substring(1);
+    } else if (!clean.startsWith('212') && clean.length === 9) {
+      clean = '212' + clean;
+    }
+    return clean || '212621908195';
+  };
+
+  const formatOrderMessage = (customerInfo: {
     name: string;
     phone: string;
     addressOrTable: string;
@@ -291,7 +312,7 @@ export const SnackProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const delivery = total >= settings.minOrderForFreeDelivery ? 0 : settings.deliveryFee;
     const finalTotal = total + delivery;
 
-    const message = `Salam 3alaykom *${settings.name}* ! 🍔
+    return `Salam 3alaykom *${settings.nameDarija || settings.name}* ! 🍔
 Bghit n-commander had l-talab 3afak:
 
 ${itemsList}
@@ -306,8 +327,16 @@ ${itemsList}
 ${customerInfo.notes ? `📝 *Remarques :* ${customerInfo.notes}` : ''}
 
 Chokran !`;
+  };
 
-    const cleanPhone = settings.whatsappNumber.replace(/[^0-9]/g, '');
+  const generateWhatsAppLink = (customerInfo: {
+    name: string;
+    phone: string;
+    addressOrTable: string;
+    notes?: string;
+  }) => {
+    const message = formatOrderMessage(customerInfo);
+    const cleanPhone = getFormattedPhoneNumber();
     return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
   };
 
@@ -338,7 +367,9 @@ Chokran !`;
         updateCartQuantity,
         clearCart,
         totalCartMAD,
+        formatOrderMessage,
         generateWhatsAppLink,
+        getFormattedPhoneNumber,
         resetAllDefaults,
         isAdminAuthenticated,
         verifyPinAndLogin,

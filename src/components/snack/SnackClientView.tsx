@@ -14,7 +14,10 @@ import {
   Lock,
   Check,
   Send,
-  KeyRound
+  KeyRound,
+  MessageCircle,
+  Copy,
+  ExternalLink
 } from 'lucide-react';
 
 interface SnackClientViewProps {
@@ -31,6 +34,7 @@ export const SnackClientView: React.FC<SnackClientViewProps> = ({ onOpenAdmin })
     removeFromCart,
     updateCartQuantity,
     totalCartMAD,
+    formatOrderMessage,
     generateWhatsAppLink,
     verifyPinAndLogin,
     isAdminAuthenticated,
@@ -45,6 +49,12 @@ export const SnackClientView: React.FC<SnackClientViewProps> = ({ onOpenAdmin })
   const [secretCodeInput, setSecretCodeInput] = useState('');
   const [codeError, setCodeError] = useState(false);
 
+  // Ready WhatsApp Message Preview Modal (Direct Message formatted for 0621908195)
+  const [isMessagePreviewOpen, setIsMessagePreviewOpen] = useState(false);
+  const [formattedMessageText, setFormattedMessageText] = useState('');
+  const [whatsAppDirectUrl, setWhatsAppDirectUrl] = useState('');
+  const [copiedSuccess, setCopiedSuccess] = useState(false);
+
   // Checkout form
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
@@ -58,21 +68,40 @@ export const SnackClientView: React.FC<SnackClientViewProps> = ({ onOpenAdmin })
 
   const cartTotalItems = cart.reduce((sum, i) => sum + i.quantity, 0);
 
-  const handleOrderSubmit = (e: React.FormEvent) => {
+  // When clicking confirmation button, format the message and show direct send interface
+  const handleOrderConfirm = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!customerName || !customerPhone || !addressOrTable) {
+    if (!customerName.trim() || !customerPhone.trim() || !addressOrTable.trim()) {
       alert('عفاك عمر سميتك ونمرتك والعنوان باش نصيفطو الطلب فـ WhatsApp.');
       return;
     }
 
-    const waUrl = generateWhatsAppLink({
-      name: customerName,
-      phone: customerPhone,
-      addressOrTable,
-      notes: orderNotes,
-    });
+    const customerData = {
+      name: customerName.trim(),
+      phone: customerPhone.trim(),
+      addressOrTable: addressOrTable.trim(),
+      notes: orderNotes.trim(),
+    };
 
-    window.open(waUrl, '_blank');
+    const text = formatOrderMessage(customerData);
+    const link = generateWhatsAppLink(customerData);
+
+    setFormattedMessageText(text);
+    setWhatsAppDirectUrl(link);
+    setIsCartOpen(false);
+    setIsMessagePreviewOpen(true);
+  };
+
+  const handleSendToWhatsAppDirect = () => {
+    if (whatsAppDirectUrl) {
+      window.open(whatsAppDirectUrl, '_blank');
+    }
+  };
+
+  const handleCopyMessage = () => {
+    navigator.clipboard.writeText(formattedMessageText);
+    setCopiedSuccess(true);
+    setTimeout(() => setCopiedSuccess(false), 2000);
   };
 
   const handleSecretLogin = (e: React.FormEvent) => {
@@ -101,10 +130,20 @@ export const SnackClientView: React.FC<SnackClientViewProps> = ({ onOpenAdmin })
                 <h1 className="text-sm sm:text-base font-extrabold text-white">
                   {settings.nameDarija}
                 </h1>
-                <p className="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5">
-                  <MapPin className="w-3 h-3 text-emerald-400 shrink-0" />
-                  <span className="line-clamp-1">{settings.address}</span>
-                </p>
+                <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5">
+                  <span className="flex items-center gap-1">
+                    <MapPin className="w-3 h-3 text-emerald-400 shrink-0" />
+                    <span className="line-clamp-1">{settings.address}</span>
+                  </span>
+                  <span aria-hidden="true">·</span>
+                  <a
+                    href="tel:0621908195"
+                    className="text-emerald-400 hover:underline flex items-center gap-1 font-mono font-bold"
+                  >
+                    <Phone className="w-3 h-3" />
+                    <span>0621908195</span>
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -302,13 +341,13 @@ export const SnackClientView: React.FC<SnackClientViewProps> = ({ onOpenAdmin })
         </main>
       </div>
 
-      {/* Discrete Footer with the Secret Button (الكليان ما كيردش ليه البال نهائياً) */}
+      {/* Discrete Footer with the Secret Button */}
       <footer className="mt-16 border-t border-slate-800/60 bg-[#0E131F] py-8 text-xs text-slate-500">
         <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="flex items-center gap-1">
             <span>© 2026 {settings.nameDarija}. جميع الحقوق محفوظة.</span>
             
-            {/* The Tiny Subtle Secret Trigger: A microscopic dot that looks like punctuation, but opens the code prompt */}
+            {/* The Tiny Subtle Secret Trigger: A microscopic dot that looks like punctuation */}
             <button
               onClick={() => {
                 if (isAdminAuthenticated) {
@@ -324,10 +363,13 @@ export const SnackClientView: React.FC<SnackClientViewProps> = ({ onOpenAdmin })
             </button>
           </p>
 
-          <div className="flex items-center gap-3 text-slate-500 text-[11px]">
-            <span>توصيل سريع فـ كازا</span>
+          <div className="flex items-center gap-3 text-slate-400 text-[11px]">
+            <span>الطلبيات المباشرة :</span>
+            <a href="tel:0621908195" className="text-emerald-400 font-mono font-bold hover:underline">
+              0621908195
+            </a>
             <span aria-hidden="true">·</span>
-            <span>طازج ومحضر يومياً</span>
+            <span>توصيل سريع فـ كازا</span>
           </div>
         </div>
       </footer>
@@ -405,7 +447,8 @@ export const SnackClientView: React.FC<SnackClientViewProps> = ({ onOpenAdmin })
                 <span>سلة الطلبيات (Panier)</span>
               </h2>
               <p className="text-xs text-slate-400 mt-0.5">
-                الطلب كيوصل نيشان فـ WhatsApp ديال السناك
+                الطلب كيوصل نيشان فـ WhatsApp ديال السناك :{' '}
+                <span className="font-mono text-emerald-400 font-bold">0621908195</span>
               </p>
             </div>
 
@@ -457,7 +500,7 @@ export const SnackClientView: React.FC<SnackClientViewProps> = ({ onOpenAdmin })
             )}
 
             {cart.length > 0 && (
-              <form onSubmit={handleOrderSubmit} className="mt-5 pt-4 border-t border-slate-800 space-y-3 text-xs">
+              <form onSubmit={handleOrderConfirm} className="mt-5 pt-4 border-t border-slate-800 space-y-3 text-xs">
                 <div className="space-y-1 bg-slate-900/60 p-3 rounded-xl border border-slate-800">
                   <div className="flex justify-between text-slate-300">
                     <span>مجموع الطلبيات :</span>
@@ -484,7 +527,7 @@ export const SnackClientView: React.FC<SnackClientViewProps> = ({ onOpenAdmin })
                 </div>
 
                 <div>
-                  <label className="text-slate-300 block mb-1 font-medium">اسمك (Nom)</label>
+                  <label className="text-slate-300 block mb-1 font-medium">اسمك الكامل (Nom)</label>
                   <input
                     type="text"
                     required
@@ -508,7 +551,7 @@ export const SnackClientView: React.FC<SnackClientViewProps> = ({ onOpenAdmin })
                 </div>
 
                 <div>
-                  <label className="text-slate-300 block mb-1 font-medium">العنوان أو رقم الطاولة</label>
+                  <label className="text-slate-300 block mb-1 font-medium">العنوان بالتفصيل أو رقم الطاولة</label>
                   <input
                     type="text"
                     required
@@ -519,15 +562,104 @@ export const SnackClientView: React.FC<SnackClientViewProps> = ({ onOpenAdmin })
                   />
                 </div>
 
+                <div>
+                  <label className="text-slate-300 block mb-1 font-medium">ملاحظات حول الطهي أو الصلصات (اختياري)</label>
+                  <input
+                    type="text"
+                    placeholder="مثال: صوص ألجيريان كثيرة، بدون بصل..."
+                    value={orderNotes}
+                    onChange={(e) => setOrderNotes(e.target.value)}
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-white focus:border-amber-500 focus:outline-none"
+                  />
+                </div>
+
+                {/* The Confirmation Button requested by user */}
                 <button
                   type="submit"
-                  className="w-full py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-lg mt-2"
+                  className="w-full py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-lg mt-2 text-xs"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>تأكيد الطلب وإرساله فـ WhatsApp</span>
+                  <Check className="w-4 h-4" />
+                  <span>تأكيد الطلب وعرض الرسالة الواجدة</span>
                 </button>
               </form>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* NEW: Ready WhatsApp Message Preview Window (كطيح معلومات الطلب على شكل رسالة ديريكت للرقم 0621908195) */}
+      {isMessagePreviewOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
+          <div className="bg-[#151D2C] border border-emerald-500/40 rounded-2xl w-full max-w-md p-5 sm:p-6 relative shadow-2xl space-y-4">
+            <button
+              onClick={() => setIsMessagePreviewOpen(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Header with 0621908195 badge */}
+            <div className="flex items-center gap-3 pr-6">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
+                <MessageCircle className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-white">رسالة الطلب واجدة للإرسال</h3>
+                <p className="text-[11px] text-emerald-400 font-mono font-bold flex items-center gap-1 mt-0.5">
+                  <span>الرقم المستهدف :</span>
+                  <span>0621908195 (+212 621 908 195)</span>
+                </p>
+              </div>
+            </div>
+
+            <p className="text-xs text-slate-300">
+              هاهي المعلومات ديال الطلب ديالك مقادة ومنسقة على شكل رسالة. كليكي على الزر الأخضر باش تصيفطها ديريكت فـ WhatsApp :
+            </p>
+
+            {/* Realistic WhatsApp Chat Bubble Container */}
+            <div className="bg-[#0B141A] border border-emerald-950 rounded-xl p-4 text-xs font-sans text-slate-100 whitespace-pre-line leading-relaxed shadow-inner max-h-64 overflow-y-auto border-l-4 border-l-emerald-500">
+              {formattedMessageText}
+            </div>
+
+            {/* Direct Send Buttons to 0621908195 */}
+            <div className="space-y-2 pt-2">
+              <button
+                type="button"
+                onClick={handleSendToWhatsAppDirect}
+                className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-emerald-500/20 text-xs sm:text-sm animate-pulse"
+              >
+                <Send className="w-4 h-4" />
+                <span>إرسال الرسالة فـ WhatsApp إلى 0621908195</span>
+              </button>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleCopyMessage}
+                  className="flex-1 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  {copiedSuccess ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <span className="text-emerald-400">تم نسخ نص الرسالة</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>نسخ نص الرسالة</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setIsMessagePreviewOpen(false)}
+                  className="py-2 px-3 text-xs text-slate-400 hover:text-white rounded-lg hover:bg-slate-800"
+                >
+                  إغلاق
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}
